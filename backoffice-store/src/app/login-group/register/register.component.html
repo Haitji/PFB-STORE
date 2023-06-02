@@ -1,0 +1,111 @@
+<h2>Registrarse</h2>
+<form #registerForm="ngForm" name="registerForm" novalidate autocomplete="off">
+
+    <!-- Nombre -->
+    <div>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="name" required>
+        <br>
+        <!-- <span *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)" class="error-msg">
+            <span *ngIf="registerForm.controls['name'].errors?.['required']">El nombre es obligatorio.</span>
+            <span *ngIf="registerForm.controls['name'].errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</span>
+            <span *ngIf="registerForm.controls['name'].errors?.['maxlength']">El nombre no puede tener más de 20 caracteres.</span>
+          </span> -->
+    </div>
+
+    <!-- Velificador nombre -->
+    <div *ngIf="(registerForm.controls['name'].dirty && registerForm.controls['name'].errors)">
+        <small class="form-text text-danger" *ngIf="registerForm.controls['name'].errors?.['required']">
+            Este campo es requerido
+        </small>
+        <!-- <small class="form-text text-danger" *ngIf="registerForm.controls['name'].errors?.['minlength']">
+            Este campo requiere mínimo 3 caracteres
+        </small> -->
+    </div>
+
+    <!-- Apellidos -->
+    <div>
+        <label for="lastName">Apellidos:</label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" required>
+
+    </div>
+    <!-- Velificador apellidos -->
+    <div *ngIf="(registerForm.controls['lastName'].dirty && registerForm.controls['lastName'].errors)">
+        <small class="form-text text-danger" *ngIf="registerForm.controls['lastName'].errors?.['required']">
+            Este campo es requerido
+        </small>
+<!--         <small class="form-text text-danger" *ngIf="registerForm.controls['lastName'].errors?.['minlength']">
+            Este campo requiere mínimo 3 caracteres
+        </small> -->
+    </div>
+
+    <!-- Telefono -->
+    <div>
+        <label for="phoneNumber">Numero de contacto:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="phoneNumber" required minlength="9"
+            min="0" pattern="[0-9]*" inputmode="numeric" (keydown)="restrictNonNumeric($event)">
+    </div>
+    <!-- Velificador telefono -->
+    <div *ngIf="(registerForm.controls['phoneNumber'].dirty && registerForm.controls['phoneNumber'].errors)">
+        <small class="form-text text-danger" *ngIf="registerForm.controls['phoneNumber'].errors?.['required']">
+            Este campo es requerido
+        </small>
+        <small class="form-text text-danger" *ngIf="registerForm.controls['phoneNumber'].errors?.['minlength']">
+            Este campo requiere mínimo 9 caracteres
+        </small>
+        <small class="form-text text-danger" *ngIf="registerForm.controls['phoneNumber'].errors?.['min']">
+            El valor debe ser positivo
+        </small>
+    </div>
+
+    <!-- Nombre usuario -->
+    <div>
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" [(ngModel)]="username" required>
+    </div>
+    <!-- Velificador nombre usuario -->
+    <div *ngIf="(registerForm.controls['username'].dirty && registerForm.controls['username'].errors)">
+        <small class="form-text text-danger" *ngIf="registerForm.controls['username'].errors?.['required']">
+            Este campo es requerido
+        </small>
+        <!-- <small class="form-text text-danger" *ngIf="registerForm.controls['username'].errors?.['minlength']">
+            Este campo requiere mínimo 3 caracteres
+        </small> -->
+    </div>
+
+    <!-- Email -->
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
+    </div>
+    <!-- Velificador email -->
+    <div *ngIf="(registerForm.controls['email'].dirty && registerForm.controls['email'].errors)">
+        <small class="form-text text-danger" *ngIf="registerForm.controls['email'].errors?.['required']">
+            Este campo es requerido
+        </small>
+        <small class="form-text text-danger" *ngIf="registerForm.controls['email'].errors?.['pattern']">
+            El formato de correo electrónico no es válido
+          </small>
+    </div>
+
+    <!-- Password -->
+    <div>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+    </div>
+    <!-- Velificador password -->
+    <div *ngIf="(registerForm.controls['password'].dirty && registerForm.controls['password'].errors)">
+        <small class="form-text text-danger" *ngIf="registerForm.controls['password'].errors?.['required']">
+            Este campo es requerido
+        </small>
+    </div>
+
+    <!-- Confirm Password -->
+    <div>
+        <label for="passwordConfirm">Repite la Contraseña:</label>
+        <input type="passwordConfirm" id="passwordConfirm" name="passwordConfirm" [(ngModel)]="passwordConfirm">
+    </div>
+
+    <button (click)="Register()">Registrarse</button>
+    <button><a class="nav-link" [routerLink]="['/login']">Volver a login</a></button>
+</form>
