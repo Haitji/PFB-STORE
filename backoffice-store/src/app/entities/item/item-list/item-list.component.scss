@@ -1,0 +1,56 @@
+.imgItem{
+    height:100px;
+    width: 100px;
+}
+form{
+    width: 90%;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top:20px;
+    margin-bottom:20px;
+    border:1px solid black;
+    padding: 20px;
+    .contenedor{
+        vertical-align: middle;
+    }
+
+}
+.botoneraPaginacion{
+    width: 50%;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.table{
+    width: 90%;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+}
+.thead-dark{
+    background-color: black;
+    color: white;
+    height: 40px;
+    vertical-align: middle;
+}
+tbody{
+    vertical-align: middle;
+}
+button{
+    margin: 10px;
+    padding: 5px;
+}
+#buttonCreateContainer{
+    padding: 5px;
+    width: 90%;
+    margin-left:auto;
+    margin-right: auto;
+}
+.btn{
+    padding: 10px;
+    width: 20%;
+}
