@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class UserController {
@@ -49,7 +50,42 @@ public class UserController {
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
 
+    @CrossOrigin
+    @GetMapping(value = "/users/{userNick}/favoritos-id")
+    public ResponseEntity<List<Long>> getIdFavoriteOfUser(@PathVariable String userNick){
+        List<Long> idFavorite = this.userService.getFavoriteIdByUserNick(userNick);
+        return new ResponseEntity<>(idFavorite,HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/users/{userNick}/favoritos")
+    public ResponseEntity<Set<ItemDTO>> getItemFavoriteOfUser(@PathVariable String userNick){
+        Set<ItemDTO> itemDTOS = this.userService.getItemFavoriteByUserNick(userNick);
+        return new ResponseEntity<>(itemDTOS,HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/users/{userNick}/favoritos/{itemId}")
+    public ResponseEntity<Void> getIdFavoriteOfUser(@PathVariable String userNick,@PathVariable Long itemId){
+        boolean correct=userService.addUserFavoriteItemById(userNick,itemId);
+        if(correct){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+
+    @CrossOrigin
+    @DeleteMapping(value = "/users/{userNick}/favoritos/remove/{itemId}")
+    public ResponseEntity<Void> deleteFavoriteOfUser(@PathVariable String userNick,@PathVariable Long itemId){
+        boolean correct=userService.deleteFavoriteItemById(userNick,itemId);
+        if(correct){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
     @CrossOrigin

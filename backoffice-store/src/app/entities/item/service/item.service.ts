@@ -7,10 +7,28 @@ import { Item } from '../model/item.model';
   providedIn: 'root'
 })
 export class ItemService {
- 
 
 
   constructor(private http: HttpClient) { }
+
+  getAllFavoriteItem(userName:string) : Observable<Item[]>{
+    let urlEndpoint: string = "http://localhost:8080/store/users/"+userName+"/favoritos";
+    return this.http.get<Item[]>(urlEndpoint);
+  }
+
+  public removeItemFromFavorite(userName: string, id: number) {
+    let urlEndpoint: string = "http://localhost:8080/store/users/"+userName+"/favoritos/remove/"+id;
+    return this.http.delete(urlEndpoint);
+  }
+  public addItemFromFavorite(userName: string, id: number) {
+    let urlEndpoint: string = "http://localhost:8080/store/users/"+userName+"/favoritos/"+id;
+    return this.http.post(urlEndpoint,null);
+  }
+
+  public getListFavoriteId(usuarioNick: string): Observable<number[]>{
+    let urlEndpoint: string = "http://localhost:8080/store/users/"+usuarioNick+"/favoritos-id";
+    return this.http.get<number[]>(urlEndpoint);
+  }
 
   public getAllItems(page: number,size: number, sort: string,filter?: string|undefined): Observable<Item[]> {
     let urlEndpoint: string = "http://localhost:8080/store/items?page="+page+"&size="+size+"&sort="+sort;

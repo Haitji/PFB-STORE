@@ -16,13 +16,34 @@
                 <a class="nav-link" [routerLink]="['articulos']">Artciulos</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" [routerLink]="['login']">Login</a>
+                <a class="nav-link" [routerLink]="login ? 'logout' : 'login'">Login</a>
             </li>
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" [routerLink]="['favoritesItems']" (click)="comprobar()">Favoritos</a>
+            </li>
+            
         </ul>
         
     </div>
     <div class="navbar-nav ml-auto">
+        <i class="fa-solid fa-user no"></i>
         <p class="texto">{{username}}</p>
     </div>
     
 </nav>
+<div class="modal" tabindex="-1" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Inicar sesion</h5>   
+        </div>
+        <div class="modal-body">
+          <p>No estas logueado, desea iniciar sesion para poder continuar?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="irALogin()">Ir a login</button>
+        </div>
+      </div>
+    </div>
+  </div>

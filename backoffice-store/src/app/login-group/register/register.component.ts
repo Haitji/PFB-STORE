@@ -18,7 +18,7 @@ export class RegisterComponent {
   password:string='';
   passwordConfirm:string='';
 
-  constructor(private registerService:RegisterService){}
+  constructor(private registerService:RegisterService,private globalClassService:GlobalClassService){}
 
   ngOnInit():void {
   }
@@ -28,7 +28,7 @@ export class RegisterComponent {
       if(this.comprobarContraseña()){
         this.registerService.registrar(new User(this.name,this.username,this.lastName,this.phoneNumber,this.email,this.password)).subscribe(
           {
-            next:(userRequest)=>{GlobalClassService.setUsuarioNick(userRequest.nick)},
+            next:(userRequest)=>{this.globalClassService.setUserName(userRequest.nick)},
             error:(error)=>{this.handleError(error);alert('El usuario introducido ya existe')}
           }
         )

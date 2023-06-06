@@ -15,4 +15,5 @@ public interface ItemPersistence {
     void deleteItem(Long id);
 
     Page<Item> findAll(Pageable pageable, String filter);
+
 }

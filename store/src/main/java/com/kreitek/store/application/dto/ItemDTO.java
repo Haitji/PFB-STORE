@@ -1,6 +1,7 @@
 package com.kreitek.store.application.dto;
 
 import com.kreitek.store.domain.entity.Category;
+import com.kreitek.store.domain.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
@@ -9,6 +10,8 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ItemDTO implements Serializable {
     private Long id;

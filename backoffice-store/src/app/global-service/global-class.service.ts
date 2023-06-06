@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalClassService {
 
+  private userName: BehaviorSubject<string>;
 
-  public static usuarioNick: string;
-  private static usuarioNickSubject: Subject<string> = new Subject<string>();
-
-  public static usuarioNick$ = GlobalClassService.usuarioNickSubject.asObservable();
-
-  public static setUsuarioNick(nuevoUsuarioNick: string) {
-    GlobalClassService.usuarioNick = nuevoUsuarioNick;
-    GlobalClassService.usuarioNickSubject.next(nuevoUsuarioNick);
+  constructor() {
+    const storedValue = localStorage.getItem('Nick');
+    const initialValue = storedValue !== null ? storedValue : '';
+    this.userName = new BehaviorSubject<string>(initialValue)
   }
-  constructor() { }
+
+  getUserName() {
+    return this.userName.asObservable();
+  }
+
+  setUserName(value: string) {
+    localStorage.setItem('Nick', value);
+    this.userName.next(value);
+  }
 }

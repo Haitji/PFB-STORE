@@ -12,7 +12,7 @@ export class LoginComponent {
 
   username: string='';
   password: string='';
-  constructor(private loginService: LoginService,private router:Router){}
+  constructor(private loginService: LoginService,private router:Router,private globalClassService:GlobalClassService){}
 
   ngOnInit():void {
 
@@ -22,8 +22,8 @@ export class LoginComponent {
     this.loginService.login(this.username, this.password).subscribe(
       (status: number) => {
         if(status === 200){
-          GlobalClassService.setUsuarioNick(this.username);
-          console.log(GlobalClassService.usuarioNick);
+          this.globalClassService.setUserName(this.username);
+          console.log(this.globalClassService.getUserName());
           this.router.navigate(['']);
         } 
       },

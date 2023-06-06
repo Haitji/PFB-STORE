@@ -4,6 +4,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,8 @@ import { HttpRequestInterceptor } from './config/interceptors/http-request-inter
 import { ModalComponent } from './components/modal/modal.component';
 import { LoginComponent } from './login-group/login/login.component';
 import { RegisterComponent } from './login-group/register/register.component';
+import { ItemFavoritesComponent } from './entities/item/item-favorites/item-favorites.component';
+import { LogoutComponent } from './login-group/logout/logout.component';
 
 
 @NgModule({
@@ -32,7 +35,9 @@ import { RegisterComponent } from './login-group/register/register.component';
     ItemFormComponent,
     ModalComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ItemFavoritesComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,8 @@ import { RegisterComponent } from './login-group/register/register.component';
     HttpClientModule,
     FormsModule,
     AutoCompleteModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TooltipModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

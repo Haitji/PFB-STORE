@@ -1,5 +1,6 @@
 <h1>{{title}}</h1>
-
+<h2>{{listFavoriteId.length}}</h2>
+<h2>{{userName}}</h2>
 
 <form>
     <div class="row contenedor">
@@ -30,9 +31,10 @@
         <th>Articulo</th>
         <th>Precio</th>
         <th>Acciones</th>
+        <th>Favorito</th>
     </thead>
     <tbody>
-        <tr *ngFor="let item of items">
+        <tr *ngFor="let item of itemsTransformado">
             <td>{{item.id}}</td>
             <td>
                 <img class="imgItem" [src]="'data:image/jpeg;base64,'+item.image" />
@@ -45,6 +47,9 @@
                 </a>
                 <button id="btnEditarCategory" [routerLink]="['/items',item.id]">Editar</button>
                 <button id="btnEliminarCategory" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" (click)="prepareItemToDelete(item.id!);">Eliminar</button>
+            </td>
+            <td>
+                <i class="{{item.favorite ? 'fa-solid fa-heart no':'fa-regular fa-heart no'}}" (click)="item.favorite ? quitarFavoritos(item.id!) : agregarAFavoritos(item.id!)" (click)="comprobar()"></i>
             </td>
         </tr>
     </tbody>
@@ -70,6 +75,23 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteItem();">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Función no disponible</h5>   
+        </div>
+        <div class="modal-body">
+          <p>No estas logueado, desea iniciar sesion para poder acceder a esta función?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="irALogin()">Ir a login</button>
         </div>
       </div>
     </div>

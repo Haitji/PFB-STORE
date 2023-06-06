@@ -1,0 +1,26 @@
+<h1>Favoritos</h1>
+<table *ngIf="items.length > 0" class="table">
+    <thead class="thead-dark">
+        <th>Id</th>
+        <th>Imagen</th>
+        <th>Articulo</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <td>{{item.id}}</td>
+            <td>
+                <img class="imgItem" [src]="'data:image/jpeg;base64,'+item.image" />
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td>
+                <a>
+                    
+                </a>
+                <button id="btnEditarCategory" >Quitar de favoritos</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

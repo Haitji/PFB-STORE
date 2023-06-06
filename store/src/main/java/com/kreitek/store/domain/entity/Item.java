@@ -5,12 +5,17 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "items")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "itemSequence")
     private Long id;
+
+
 
     @Column(nullable = false,length = 100)
     @Size(min = 3,max = 100)
@@ -29,6 +34,7 @@ public class Item {
     @ManyToOne()
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
+
 
     public Item() {
     }

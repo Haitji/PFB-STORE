@@ -6,6 +6,9 @@ import { ItemListComponent } from './entities/item/item-list/item-list.component
 import { ItemFormComponent } from './entities/item/item-form/item-form.component';
 import { LoginComponent } from './login-group/login/login.component';
 import { RegisterComponent } from './login-group/register/register.component';
+import { ItemFavoritesComponent } from './entities/item/item-favorites/item-favorites.component';
+import { LogoutComponent } from './login-group/logout/logout.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent,pathMatch:'full'},
@@ -15,7 +18,9 @@ const routes: Routes = [
   { path: 'items/:itemId', component: ItemFormComponent},
   { path: 'items/new', component: ItemFormComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'favoritesItems', component: ItemFavoritesComponent},
+  { path: 'logout', component: LogoutComponent}
 ];
 
 @NgModule({
