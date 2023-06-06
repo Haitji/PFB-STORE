@@ -1,11 +1,14 @@
 package com.kreitek.store.application.dto;
 
+import com.kreitek.store.domain.entity.Item;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserDTO implements Serializable {
 
@@ -22,6 +25,16 @@ public class UserDTO implements Serializable {
     private String email;
 
     private String password;
+
+    private Set<ItemDTO> favoritos;
+
+    public Set<ItemDTO> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(Set<ItemDTO> favoritos) {
+        this.favoritos = favoritos;
+    }
 
     public UserDTO() {
     }

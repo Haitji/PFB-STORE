@@ -3,6 +3,9 @@ package com.kreitek.store.domain.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "Users")
 public class User {
@@ -28,6 +31,22 @@ public class User {
 
     @Column(nullable = false,length = 1000)
     private String password;
+
+    public Set<Item> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(Set<Item> favoritos) {
+        this.favoritos = favoritos;
+    }
+
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "usuario_favoritos",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
+    private Set<Item> favoritos;
 
     public User() {
     }

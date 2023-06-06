@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { GlobalClassService } from 'src/app/global-service/global-class.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +11,42 @@ import { GlobalClassService } from 'src/app/global-service/global-class.service'
 export class NavbarComponent {
 
   username: string='';
+  login:boolean=false;
+  showModal = false;
 
-  constructor() {
+  constructor(private globalService: GlobalClassService,private router:Router) {
   }
   ngOnInit() {
-    this.username = GlobalClassService.usuarioNick;
-    GlobalClassService.usuarioNick$.subscribe((nuevoUsuarioNick: string) => {
-      this.username = nuevoUsuarioNick;
+    this.globalService.getUserName().subscribe(value =>{
+      this.username=value;
+      this.comprobarLogin();
     });
+  }
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  private comprobarLogin(){
+    if(this.username===""){
+      this.login=false;
+    }else{
+      this.login=true;
+    }
+  }
+
+  irALogin(){
+    this.router.navigate(['login']);
+    this.closeModal();
+  }
+
+  comprobar(){
+    if(!this.login){
+      this.openModal();
+    }
   }
 
 }
