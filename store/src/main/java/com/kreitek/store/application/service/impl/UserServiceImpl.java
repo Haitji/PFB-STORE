@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public List<UserDTO> getAllUsers() {
         List<User> users = this.persistence.getAllUsers();
+        System.out.println(users.get(1).getFavoritos().size());
         return mapper.toDto(users);
     }
 

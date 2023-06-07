@@ -1,98 +1,144 @@
 <h1>{{title}}</h1>
-<h2>{{listFavoriteId.length}}</h2>
-<h2>{{userName}}</h2>
+<!-- <h2>{{listFavoriteId.length}}</h2>
+<h2>{{userName}}</h2> -->
 
 <form>
-    <div class="row contenedor">
-        <div class="form-group" class="col-12 col-md-6">
-            <label for="name">Nombre</label>
-            <input type="text" [(ngModel)]="nameFilter" name="name">
-        </div>
-
-        <div class="form-group" class="col-12 col-md-3">
-            <label for="price">Price</label>
-            <input type="number" [(ngModel)]="priceFilter" name="price">
-        </div>
-
-        <div class="col-12 col-md-3">
-            <button id="btnSearch" class="btn btn-secondary" (click)="searchByFilter();">Buscar</button>
-        </div>
+  <div class="row contenedor">
+    <div class="form-group" class="col-12 col-md-6">
+      <label for="name">Nombre</label>
+      <input type="text" [(ngModel)]="nameFilter" name="name">
     </div>
+
+    <div class="form-group" class="col-12 col-md-3">
+      <label for="price">Price</label>
+      <input type="number" [(ngModel)]="priceFilter" name="price">
+    </div>
+
+    <div class="col-12 col-md-3">
+      <button id="btnSearch" class="btn btn-secondary" (click)="searchByFilter();">Buscar</button>
+    </div>
+  </div>
 </form>
 
 <div id="buttonCreateContainer">
-    <button [routerLink]="['/items/new']" class="btn btn-primary">Nuevo atículo</button>
+  <button [routerLink]="['/items/new']" class="btn btn-primary">Nuevo atículo</button>
 </div>
 
 <table *ngIf="items.length > 0" class="table">
-    <thead class="thead-dark">
-        <th>Id</th>
-        <th>Imagen</th>
-        <th>Articulo</th>
-        <th>Precio</th>
-        <th>Acciones</th>
-        <th>Favorito</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of itemsTransformado">
-            <td>{{item.id}}</td>
-            <td>
-                <img class="imgItem" [src]="'data:image/jpeg;base64,'+item.image" />
-            </td>
-            <td>{{item.name}}</td>
-            <td>{{item.price}}</td>
-            <td>
-                <a>
-                    
-                </a>
-                <button id="btnEditarCategory" [routerLink]="['/items',item.id]">Editar</button>
-                <button id="btnEliminarCategory" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" (click)="prepareItemToDelete(item.id!);">Eliminar</button>
-            </td>
-            <td>
-                <i class="{{item.favorite ? 'fa-solid fa-heart no':'fa-regular fa-heart no'}}" (click)="item.favorite ? quitarFavoritos(item.id!) : agregarAFavoritos(item.id!)" (click)="comprobar()"></i>
-            </td>
-        </tr>
-    </tbody>
+  <thead class="thead-dark">
+    <th>Id</th>
+    <th>Imagen</th>
+    <th>Articulo</th>
+    <th>Precio</th>
+    <th>Acciones</th>
+    <ng-container *ngIf=" userName!=''">
+      <th>Añadir al carrito</th>
+      <th>Favorito</th>
+    </ng-container>
+
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of itemsTransformado">
+      <td>{{item.id}}</td>
+      <td>
+        <img class="imgItem" [src]="'data:image/jpeg;base64,'+item.image" />
+      </td>
+      <td>{{item.name}}</td>
+      <td>{{item.price}}</td>
+      <td>
+        <a>
+
+        </a>
+        <button class="btn btn-secondary" id="btnEditarCategory" [routerLink]="['/items',item.id]">Editar</button>
+        <button class="btn btn-secondary" id="btnEliminarCategory" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete"
+          (click)="prepareItemToDelete(item.id!);">Eliminar</button>
+      </td>
+      <ng-container *ngIf=" userName!=''">
+        <td>
+          <button class="btn btn-secondary" data-bs-target="#shoppingCartModal" data-bs-toggle="modal"
+            (click)="seleccionarItem(item.id!)">Añadir </button>
+        </td>
+        <td>
+          <i class="{{item.favorite ? 'fa-solid fa-heart no':'fa-regular fa-heart no'}}"
+            (click)="item.favorite ? quitarFavoritos(item.id!) : agregarAFavoritos(item.id!)" (click)="comprobar()"></i>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
 </table>
 
 <div class="botoneraPaginacion">
-    <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">Anterior</button>
-    <span>PPagina {{page+1}} de {{totalPages}} - Elementos totales: {{totalElements}}</span>
-    <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">Siguiente</button>
+  <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">Anterior</button>
+  <span>Pagina {{page+1}} de {{totalPages}} - Elementos totales: {{totalElements}}</span>
+  <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">Siguiente</button>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirmacion eliminar</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ¿Seguro que desea eliminar el registro selecionado?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteItem();">Eliminar</button>
-        </div>
+<div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmacion eliminar{{itemIdToDelete}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Seguro que desea eliminar el registro selecionado?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteItem();">Eliminar</button>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal" tabindex="-1" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" [style.display]="showModal ? 'block' : 'none'">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Función no disponible</h5>   
-        </div>
-        <div class="modal-body">
-          <p>No estas logueado, desea iniciar sesion para poder acceder a esta función?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="irALogin()">Ir a login</button>
-        </div>
+<div class="modal" tabindex="-1" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog"
+  [style.display]="showModal ? 'block' : 'none'">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Función no disponible</h5>
+      </div>
+      <div class="modal-body">
+        <p>No estas logueado, desea iniciar sesion para poder acceder a esta función?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="irALogin()">Ir a login</button>
       </div>
     </div>
   </div>
+</div>
+
+<h1>{{units}}</h1>
+<div class="modal fade" id="shoppingCartModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir articulo al carrito</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="limpiarCampos()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="carrito">
+          <img class="imgItem2" [src]="'data:image/jpeg;base64,'+items[posicion].image" />
+          <div class="derecha">
+            <h4 class="carrito-item">Articulo: {{items[posicion].name}}</h4>
+            <h4 class="carrito-item">Precio: {{items[posicion].price}}$</h4>
+            <div class="carrito-item">
+              <div class="form-group">
+                <label for="units" class="col-form-label">Unidades:</label>
+                <input type="number" class="form-control" id="units" placeholder="Cantidad de item" min="0" [(ngModel)]="units" (ngModelChange)="calcularPrecio()" (keydown)="false">
+              </div>
+            </div>
+          </div>
+        </div>
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="limpiarCampos()">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addCarrito(itemId,units)">Añadir</button>
+      </div>
+    </div>
+  </div>
+</div>

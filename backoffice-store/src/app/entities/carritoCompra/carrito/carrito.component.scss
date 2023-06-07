@@ -1,76 +1,88 @@
-.imgItem{
-    height:100px;
+.imgItem {
+    height: 100px;
     width: 100px;
 }
-form{
+
+form {
     width: 90%;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
-    margin-top:20px;
-    margin-bottom:20px;
-    border:1px solid black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
     padding: 20px;
-    .contenedor{
+
+    .contenedor {
         vertical-align: middle;
     }
 
 }
-.botoneraPaginacion{
+
+.botoneraPaginacion {
     width: 50%;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
-    margin-top:30px;
+    margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.table{
+
+.table {
     width: 90%;
     margin: 10px;
     margin-left: auto;
     margin-right: auto;
     border: 1px solid black;
 }
-.thead-dark{
+
+.thead-dark {
     background-color: black;
     color: white;
     height: 40px;
     vertical-align: middle;
 }
-tbody{
+
+tbody {
     vertical-align: middle;
 }
-button{
+
+button {
     margin: 10px;
     padding: 5px;
 }
-#buttonCreateContainer{
+
+#buttonCreateContainer {
     padding: 5px;
     width: 90%;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
 }
-.btn{
+
+.btn {
     padding: 10px;
     width: 20%;
 }
-.no{
-    color:red;
+
+.no {
+    color: red;
     font-size: 25px;
 }
-.carrito{
+
+.carrito {
     display: flex;
     flex-direction: row;
 
 }
-.derecha{
+
+.botones {
     display: flex;
     flex-direction: column;
+    margin-left: -60px;
 }
-.imgItem2{
-    height:150px;
-    width: 150px;
-}
-.carrito-item{
-    padding-left:15px;
+
+.anclado {
+    position: fixed;
+    left: 20px;
+    bottom: 200px;
 }

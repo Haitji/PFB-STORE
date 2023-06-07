@@ -5,7 +5,9 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,6 +36,9 @@ public class Item {
     @ManyToOne()
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.REMOVE)
+    private List<ShoppingCart> carritoItems = new ArrayList<>();
 
 
     public Item() {

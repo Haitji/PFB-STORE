@@ -9,9 +9,18 @@ import { Item } from '../model/item.model';
 export class ItemService {
 
 
-  constructor(private http: HttpClient) { }
 
-  getAllFavoriteItem(userName:string) : Observable<Item[]>{
+  constructor(private http: HttpClient) { }
+  public addItemOnShoppingCart(userName: string, id: number, units: number) {
+    const body = {
+      id: id,
+      units: units
+    };
+    let urlEndpoint: string = "http://localhost:8080/store/users/"+userName+"/shoppingcart";
+    return this.http.post(urlEndpoint, body);
+  }
+
+  public getAllFavoriteItem(userName:string) : Observable<Item[]>{
     let urlEndpoint: string = "http://localhost:8080/store/users/"+userName+"/favoritos";
     return this.http.get<Item[]>(urlEndpoint);
   }

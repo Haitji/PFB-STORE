@@ -3,7 +3,9 @@ package com.kreitek.store.domain.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -47,6 +49,17 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
     private Set<Item> favoritos;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<ShoppingCart> carritoItems = new ArrayList<>();
+
+    public List<ShoppingCart> getCarritoItems() {
+        return carritoItems;
+    }
+
+    public void setCarritoItems(List<ShoppingCart> carritoItems) {
+        this.carritoItems = carritoItems;
+    }
 
     public User() {
     }
