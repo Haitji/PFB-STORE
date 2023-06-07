@@ -32,4 +32,16 @@ export class ItemFavoritesComponent {
   handleError(error: any): void {
     console.log(error)
   }
+  quitarDeFavorito(id:number){
+    this.itemService.removeItemFromFavorite(this.userName,id).subscribe({
+      next:(hola:any)=>{this.quitar(id)},
+      error:(err)=>{this.handleError(err)}
+    })
+  }
+  quitar(id:number){
+    const index = this.items.findIndex(item => item.id === id);
+    if(index != -1){
+      this.items.splice(index,1);
+    }
+  }
 }

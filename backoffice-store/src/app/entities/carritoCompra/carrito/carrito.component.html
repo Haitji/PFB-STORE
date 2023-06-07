@@ -1,0 +1,34 @@
+<h1>Carrito compra</h1>
+<h4 class="anclado">Precio total: {{precioTotal}}$</h4>
+<table *ngIf="Carrito.length > 0" class="table">
+    <thead class="thead-dark">
+      <th>Id</th>
+      <th>Imagen</th>
+      <th>Articulo</th>
+      <th>Categoria</th>
+      <th>Precio</th>
+      <th>Unidades</th>
+      <th>Acciones</th>
+  
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of Carrito">
+        <td>{{item.id}}</td>
+        <td>
+          <img class="imgItem" [src]="'data:image/jpeg;base64,'+item.image" />
+        </td>
+        <td>{{item.name}}</td>
+        <td>{{item.categoryName}}</td>
+        <td>{{item.price}}</td>
+        <td>
+          <input type="number" id="units" placeholder="Cantidad de item" min="0" [(ngModel)]="item.units" (keydown)="false" (ngModelChange)="calcularPrecio()" >
+          <button id="boton" (click)="addCarrito(item.id,item.units)">Guardar cambios</button>
+        </td>
+        <td class="botones">
+          <button id="boton" [routerLink]="['/items',item.id]">Ficha articulo</button>
+          <button id="boton" (click)="quitarDeCarrito(item.id)">Quitar de la lista</button>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>

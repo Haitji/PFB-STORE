@@ -8,6 +8,7 @@ import { LoginComponent } from './login-group/login/login.component';
 import { RegisterComponent } from './login-group/register/register.component';
 import { ItemFavoritesComponent } from './entities/item/item-favorites/item-favorites.component';
 import { LogoutComponent } from './login-group/logout/logout.component';
+import { CarritoComponent } from './entities/carritoCompra/carrito/carrito.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'favoritesItems', component: ItemFavoritesComponent},
-  { path: 'logout', component: LogoutComponent}
+  { path: 'logout', component: LogoutComponent},
+  { path: 'carrito', component: CarritoComponent}
 ];
 
 @NgModule({

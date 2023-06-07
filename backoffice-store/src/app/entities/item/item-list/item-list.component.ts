@@ -35,6 +35,10 @@ export class ItemListComponent {
 
   itemIdToDelete?: number;
   showModal = false;
+  itemId:number = 0;
+  posicion:number = 0;
+  units:number =0;
+  precioTotal:number = 0;
 
   constructor(private router: ActivatedRoute, private itemService: ItemService, private globalService: GlobalClassService,private router2:Router) { }
 
@@ -203,5 +207,33 @@ export class ItemListComponent {
     if(this.userName===""){
       this.openModal();
     }
+  }
+  seleccionarItem(numero: number) {
+    const index = this.items.findIndex(item => item.id === numero);
+    if(index != -1){
+      this.posicion=index;
+    }
+    this.itemId=numero;
+    
+  }
+  calcularPrecio(){
+    const foundItem = this.items.find(item => item.id === this.itemId);
+    if(this.units>=0){
+      let calculo = this.units * foundItem!.price;
+      console.log(this.units);
+      console.log(calculo);
+      this.precioTotal=calculo;
+    }
+  }
+
+  limpiarCampos(){
+    this.units = 0;
+    this.precioTotal=0;
+  }
+  addCarrito(id: number,unidades: number){
+    this.itemService.addItemOnShoppingCart(this.userName,id,unidades).subscribe({
+      next: (responseBody: any) => {alert("Item añadido con exito al carrito");this.limpiarCampos()},
+      error: (error) => { this.handleError(error) }
+    })
   }
 }

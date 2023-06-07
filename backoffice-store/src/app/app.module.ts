@@ -21,6 +21,7 @@ import { LoginComponent } from './login-group/login/login.component';
 import { RegisterComponent } from './login-group/register/register.component';
 import { ItemFavoritesComponent } from './entities/item/item-favorites/item-favorites.component';
 import { LogoutComponent } from './login-group/logout/logout.component';
+import { CarritoComponent } from './entities/carritoCompra/carrito/carrito.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { LogoutComponent } from './login-group/logout/logout.component';
     LoginComponent,
     RegisterComponent,
     ItemFavoritesComponent,
-    LogoutComponent
+    LogoutComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { GlobalClassService } from 'src/app/global-service/global-class.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { GlobalClassService } from 'src/app/global-service/global-class.service'
 export class LogoutComponent {
   username: string='';
 
-  constructor(private globalService: GlobalClassService) {
+  constructor(private globalService: GlobalClassService,private router:Router) {
   }
 
   ngOnInit() {
@@ -19,6 +20,7 @@ export class LogoutComponent {
   }
   logout(){
     this.globalService.setUserName('');
+    this.router.navigate(['/login']);
   }
 
 }

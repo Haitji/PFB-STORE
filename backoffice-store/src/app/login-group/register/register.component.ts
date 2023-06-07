@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RegisterService } from '../service/register.service';
 import { User } from './entity/user.model';
 import { GlobalClassService } from 'src/app/global-service/global-class.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent {
   password:string='';
   passwordConfirm:string='';
 
-  constructor(private registerService:RegisterService,private globalClassService:GlobalClassService){}
+  constructor(private registerService:RegisterService,private globalClassService:GlobalClassService,private router:Router){}
 
   ngOnInit():void {
   }
@@ -28,7 +29,7 @@ export class RegisterComponent {
       if(this.comprobarContraseña()){
         this.registerService.registrar(new User(this.name,this.username,this.lastName,this.phoneNumber,this.email,this.password)).subscribe(
           {
-            next:(userRequest)=>{this.globalClassService.setUserName(userRequest.nick)},
+            next:(userRequest)=>{this.globalClassService.setUserName(userRequest.nick);this.router.navigate(['']);},
             error:(error)=>{this.handleError(error);alert('El usuario introducido ya existe')}
           }
         )
