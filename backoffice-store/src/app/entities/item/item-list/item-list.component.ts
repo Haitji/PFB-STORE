@@ -231,9 +231,13 @@ export class ItemListComponent {
     this.precioTotal=0;
   }
   addCarrito(id: number,unidades: number){
-    this.itemService.addItemOnShoppingCart(this.userName,id,unidades).subscribe({
-      next: (responseBody: any) => {alert("Item añadido con exito al carrito");this.limpiarCampos()},
-      error: (error) => { this.handleError(error) }
-    })
+    if(this.units>0){
+      this.itemService.addItemOnShoppingCart(this.userName,id,unidades).subscribe({
+        next: (responseBody: any) => {alert("Item añadido con exito al carrito");this.limpiarCampos()},
+        error: (error) => { this.handleError(error) }
+      })
+    }else{
+      alert("No puedes añadir unidades 0")
+    }
   }
 }

@@ -4,6 +4,7 @@ import { GlobalClassService } from 'src/app/global-service/global-class.service'
 import { CarritoService } from '../service/carrito.service';
 import { CarritoItem } from '../model/carritoItem.model';
 import { Item } from '../../item/model/item.model';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-carrito',
@@ -15,6 +16,8 @@ export class CarritoComponent {
   Carrito: CarritoItem[] = [];
   userName: string = "";
   precioTotal: string = "0";
+  botonDeshabilitado:boolean=true;
+  direccion: string = "";
 
   constructor(private carritoService: CarritoService, private globalService: GlobalClassService, private router: Router) { }
 
@@ -24,11 +27,12 @@ export class CarritoComponent {
     });
     this.getCarrito();
     this.calcularPrecio();
+    
   }
 
-  private getCarrito() {
+  getCarrito() {
     this.carritoService.getCarritoDelUsuario(this.userName).subscribe({
-      next: (list) => { this.Carrito = list;this.calcularPrecioInicio(list) },
+      next: (list) => { this.Carrito = list;this.calcularPrecioInicio(list);this.comprobarListaLenght(list);},
       error: (error) => { this.handleError(error); }
     })
   }
@@ -69,5 +73,25 @@ export class CarritoComponent {
       next: (responseBody: any) => {alert("Item guardado con exito al carrito")},
       error: (error) => { this.handleError(error) }
     })
+  }
+
+  comprobarListaLenght(lista: CarritoItem[]){
+    if(lista.length > 0){
+      this.botonDeshabilitado=false;
+    }
+  }
+
+  addOrder(){
+    const fechaHoy: Date = new Date();
+    const formatoFecha = format(fechaHoy, 'dd/MM/yyyy HH:mm');
+    let lista:number[]=this.Carrito.map(item => item.shoppingCartId);
+    if(this.direccion==""){
+      alert("La direccion no puede estar vacio")
+    }else{
+      this.carritoService.addOrder(this.userName,formatoFecha,this.direccion,lista).subscribe({
+        next: (responseBody: any) => {alert("Pedido realizado con exito");this. getCarrito()},
+        error: (error) => { this.handleError(error); alert(error.message) }
+      })
+    }
   }
 }

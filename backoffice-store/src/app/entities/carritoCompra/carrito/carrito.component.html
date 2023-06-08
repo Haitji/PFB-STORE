@@ -1,34 +1,61 @@
-<h1>Carrito compra</h1>
-<h4 class="anclado">Precio total: {{precioTotal}}$</h4>
+<div class="cabecera">
+  <h1 class="titulo">Carrito compra</h1>
+  <button class="boton2" [disabled]="botonDeshabilitado" data-bs-target="#shoppingCartModal" data-bs-toggle="modal" (click)="getCarrito()">Añadir pedido</button>
+</div>
 <table *ngIf="Carrito.length > 0" class="table">
-    <thead class="thead-dark">
-      <th>Id</th>
-      <th>Imagen</th>
-      <th>Articulo</th>
-      <th>Categoria</th>
-      <th>Precio</th>
-      <th>Unidades</th>
-      <th>Acciones</th>
-  
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of Carrito">
-        <td>{{item.id}}</td>
-        <td>
-          <img class="imgItem" [src]="'data:image/jpeg;base64,'+item.image" />
-        </td>
-        <td>{{item.name}}</td>
-        <td>{{item.categoryName}}</td>
-        <td>{{item.price}}</td>
-        <td>
-          <input type="number" id="units" placeholder="Cantidad de item" min="0" [(ngModel)]="item.units" (keydown)="false" (ngModelChange)="calcularPrecio()" >
-          <button id="boton" (click)="addCarrito(item.id,item.units)">Guardar cambios</button>
-        </td>
-        <td class="botones">
-          <button id="boton" [routerLink]="['/items',item.id]">Ficha articulo</button>
-          <button id="boton" (click)="quitarDeCarrito(item.id)">Quitar de la lista</button>
-          
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <thead class="thead-dark">
+    <th>Id</th>
+    <th>Imagen</th>
+    <th>Articulo</th>
+    <th>Categoria</th>
+    <th>Precio</th>
+    <th>Unidades</th>
+    <th>Acciones</th>
+
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of Carrito">
+      <td>{{item.id}}</td>
+      <td>
+        <img class="imgItem" [src]="'data:image/jpeg;base64,'+item.image" />
+      </td>
+      <td>{{item.name}}</td>
+      <td>{{item.categoryName}}</td>
+      <td>{{item.price}}</td>
+      <td>
+        <input type="number" id="units" placeholder="Cantidad de item" min="0" [(ngModel)]="item.units"
+          (keydown)="false" (ngModelChange)="calcularPrecio()">
+        <button id="boton" (click)="addCarrito(item.id,item.units)">Guardar cambios</button>
+      </td>
+      <td class="botones">
+        <button id="boton" [routerLink]="['/items',item.id]">Ficha articulo</button>
+        <button id="boton" (click)="quitarDeCarrito(item.id)">Quitar de la lista</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h4 class="precio">Precio total: {{precioTotal}}$</h4>
+
+
+<div class="modal fade" id="shoppingCartModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir articulo al carrito</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="direccion" class="col-form-label">Direccion del envio:</label>
+          <input type="text" class="form-control" id="units" placeholder="Ej: Calle Rioja 3 4" [(ngModel)]="direccion">
+        </div>
+
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addOrder()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

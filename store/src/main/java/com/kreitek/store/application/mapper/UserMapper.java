@@ -12,9 +12,11 @@ import java.util.List;
 public interface UserMapper extends EntityMapper<UserDTO, User> {
     @Override
     @Mapping(target = "carritoItems",ignore = true)
+    @Mapping(target = "pedidos",ignore = true)
     User toEntity(UserDTO user);
 
     @Override
     @Mapping(target = "carritoItems",ignore = true)
+    @Mapping(target = "pedidos",ignore = true)
     List<User> toEntity(List<UserDTO> user);
 }

@@ -68,29 +68,3 @@ button {
     color: red;
     font-size: 25px;
 }
-
-.carrito {
-    display: flex;
-    flex-direction: row;
-
-}
-
-.botones {
-    display: flex;
-    flex-direction: column;
-    margin-left: -60px;
-}
-.boton2{
-    margin-left: 80%;
-    display: inline-block;
-    width: 15%;
-}
-.titulo{
-    display: inline-block;
-}
-.precio {
-    border: 1px solid black;
-    padding:5px;
-    margin-left: 85%;
-    margin-right: 5%;
-}

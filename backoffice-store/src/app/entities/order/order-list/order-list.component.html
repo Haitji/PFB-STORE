@@ -1,0 +1,26 @@
+
+<h1 class="titulo">Carrito compra</h1>
+
+
+  <table *ngIf="orderList.length > 0" class="table">
+    <thead class="thead-dark">
+      <th>Id</th>
+      <th>Fecha de pedido</th>
+      <th>Direccion de pedido</th>
+      <th>Recogido</th>
+      <th>Acciones</th>
+  
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of orderList">
+        <td>{{item.id}}</td>
+        <td>{{item.orderDate}}</td>
+        <td>{{item.shippingAddress}}</td>
+        <td>{{item.sent}}</td>
+        <td class="botones">
+          <button id="boton" [routerLink]="['/orderList',item.id]">Detalles</button>
+          <button id="boton" (click)="cancelOrder(item.id)">Cancelar pedido</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

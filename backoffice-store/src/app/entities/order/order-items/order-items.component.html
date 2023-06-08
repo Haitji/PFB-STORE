@@ -1,0 +1,30 @@
+<h1 class="titulo">Lista de articulos del pedido {{orderId}}</h1>
+
+
+  <table *ngIf="orderList.length > 0" class="table">
+    <thead class="thead-dark">
+      <th>Id</th>
+    <th>Imagen</th>
+    <th>Articulo</th>
+    <th>Categoria</th>
+    <th>Precio</th>
+    <th>Unidades</th>
+    <th>Acciones</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of orderList">
+        <td>{{item.id}}</td>
+      <td>
+        <img class="imgItem" [src]="'data:image/jpeg;base64,'+item.image" />
+      </td>
+      <td>{{item.name}}</td>
+      <td>{{item.categoryName}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.units}}</td>
+        <td class="botones">
+          <button id="boton" (click)="removeItem(item.shoppingCartId)">Devolver articulo</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ 

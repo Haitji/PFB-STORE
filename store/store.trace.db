@@ -117,3 +117,15 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	... 47 more
+2023-06-08 12:11:57 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "ITEMS_USUARIOS" no encontrada
+Table "ITEMS_USUARIOS" not found; SQL statement:
+DROP TABLE ITEMS_USUARIOS [42102-214]
+2023-06-08 12:19:14 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (SHOPPING_CART: ""ID"" BIGINT NOT NULL)"
+Data conversion error converting "'' (SHOPPING_CART: ""ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SHOPPING_CART"("ID","UNITS","ITEM_ID","USER_ID","ORDER_ID")VALUES(?,?,?,?,?) [22018-214]
+2023-06-08 12:19:14 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (SHOPPING_CART: ""ID"" BIGINT NOT NULL)"
+Data conversion error converting "'' (SHOPPING_CART: ""ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SHOPPING_CART"("ID","UNITS","ITEM_ID","USER_ID","ORDER_ID")VALUES(?,?,?,?,?) [22018-214]

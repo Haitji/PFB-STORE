@@ -3,6 +3,9 @@ package com.kreitek.store.application.dto;
 import java.io.Serializable;
 
 public class ItemShoppingCartDTO implements Serializable {
+    private Long shoppingCartId;
+
+
     private Long id;
 
     private String name;
@@ -16,6 +19,14 @@ public class ItemShoppingCartDTO implements Serializable {
     private int units;
 
     public ItemShoppingCartDTO() {
+    }
+
+    public Long getShoppingCartId() {
+        return shoppingCartId;
+    }
+
+    public void setShoppingCartId(Long shoppingCartId) {
+        this.shoppingCartId = shoppingCartId;
     }
 
     public int getUnits() {
