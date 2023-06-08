@@ -1,5 +1,6 @@
 package com.kreitek.store.infrastructure.persistence;
 
+import com.kreitek.store.application.dto.OrderInsertDTO;
 import com.kreitek.store.domain.entity.Item;
 import com.kreitek.store.domain.entity.ShoppingCart;
 import com.kreitek.store.domain.entity.User;
@@ -22,7 +23,7 @@ public class ShoppinCartPersistenceImpl implements ShoppinCartPersistence {
 
     @Override
     public List<ShoppingCart> GetShoppingCartByUser(User user) {
-        List<ShoppingCart> shoppingCarts = repository.findByUser(user);
+        List<ShoppingCart> shoppingCarts = repository.findByUserAndOrder(user,null);
         return shoppingCarts;
     }
 
@@ -33,11 +34,26 @@ public class ShoppinCartPersistenceImpl implements ShoppinCartPersistence {
 
     @Override
     public Optional<ShoppingCart> getShoppingCartByUserAndItem(User user1, Item item) {
-        return this.repository.findByUserAndItem(user1,item);
+        return this.repository.findByUserAndItemAndOrder(user1,item,null);
     }
 
     @Override
     public void deleteItemOnShoppingCartByUser(User user1, Item item) {
         this.repository.deleteByUserAndItem(user1,item);
+    }
+
+    @Override
+    public List<ShoppingCart> getShoppingCartByList(List<Long> orderInsertDTO) {
+        return repository.findAllByIdIn(orderInsertDTO);
+    }
+
+    @Override
+    public Optional<ShoppingCart> getShoppingCartById(Long shoppingCartId) {
+        return this.repository.findById(shoppingCartId);
+    }
+
+    @Override
+    public void deleteById(Long shoppingCartId) {
+        this.repository.deleteById(shoppingCartId);
     }
 }

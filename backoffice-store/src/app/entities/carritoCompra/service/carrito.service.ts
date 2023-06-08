@@ -7,9 +7,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CarritoService {
-  
 
   constructor(private http: HttpClient) { }
+
+  public addOrder(userName: string, formatoFecha: string, direccion: string, lista: number[]) {
+    const body = {
+      orderDate: formatoFecha,
+      shippingAddress: direccion,
+      carritos:lista
+    };
+    let urlEndpoint: string = "http://localhost:8080/store/users/"+userName+"/orders"
+    return this.http.post(urlEndpoint,body);
+  }
 
   public getCarritoDelUsuario(userName: string):Observable<CarritoItem[]> {
     let urlEndpoint: string = "http://localhost:8080/store/users/"+userName+"/shoppingcart"

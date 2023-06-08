@@ -22,6 +22,9 @@ import { RegisterComponent } from './login-group/register/register.component';
 import { ItemFavoritesComponent } from './entities/item/item-favorites/item-favorites.component';
 import { LogoutComponent } from './login-group/logout/logout.component';
 import { CarritoComponent } from './entities/carritoCompra/carrito/carrito.component';
+import { OrderListComponent } from './entities/order/order-list/order-list.component';
+import { OrderItemsComponent } from './entities/order/order-items/order-items.component';
+
 
 
 @NgModule({
@@ -39,7 +42,9 @@ import { CarritoComponent } from './entities/carritoCompra/carrito/carrito.compo
     RegisterComponent,
     ItemFavoritesComponent,
     LogoutComponent,
-    CarritoComponent
+    CarritoComponent,
+    OrderListComponent,
+    OrderItemsComponent
   ],
   imports: [
     BrowserModule,

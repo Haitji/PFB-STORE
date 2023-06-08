@@ -53,6 +53,17 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<ShoppingCart> carritoItems = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Order> pedidos;
+
+    public List<Order> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Order> pedidos) {
+        this.pedidos = pedidos;
+    }
+
     public List<ShoppingCart> getCarritoItems() {
         return carritoItems;
     }

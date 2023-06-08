@@ -9,6 +9,9 @@ import { RegisterComponent } from './login-group/register/register.component';
 import { ItemFavoritesComponent } from './entities/item/item-favorites/item-favorites.component';
 import { LogoutComponent } from './login-group/logout/logout.component';
 import { CarritoComponent } from './entities/carritoCompra/carrito/carrito.component';
+import { OrderListComponent } from './entities/order/order-list/order-list.component';
+import { OrderItemsComponent } from './entities/order/order-items/order-items.component';
+
 
 
 const routes: Routes = [
@@ -22,7 +25,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'favoritesItems', component: ItemFavoritesComponent},
   { path: 'logout', component: LogoutComponent},
-  { path: 'carrito', component: CarritoComponent}
+  { path: 'carrito', component: CarritoComponent},
+  { path: 'orderList', component: OrderListComponent},
+  { path: 'orderList/:orderId', component: OrderItemsComponent}
 ];
 
 @NgModule({
