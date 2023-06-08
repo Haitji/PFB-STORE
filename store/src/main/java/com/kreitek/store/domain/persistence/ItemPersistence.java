@@ -12,7 +12,7 @@ public interface ItemPersistence {
     List<Item> getAllItemsByCategory(Long id);
     Optional<Item> getItemById(Long id);
     Item saveItem(Item item);
-    void deleteItem(Long id);
+    void deleteItem(Item item);
 
     Page<Item> findAll(Pageable pageable, String filter);
 

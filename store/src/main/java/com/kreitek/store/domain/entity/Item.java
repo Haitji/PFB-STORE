@@ -40,6 +40,17 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.REMOVE)
     private List<ShoppingCart> carritoItems = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "favoritos")
+    private Set<User> usuarios;
+
+
+    public Set<User> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<User> usuarios) {
+        this.usuarios = usuarios;
+    }
 
     public Item() {
     }

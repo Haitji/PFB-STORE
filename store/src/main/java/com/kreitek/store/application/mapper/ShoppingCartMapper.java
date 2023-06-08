@@ -7,7 +7,7 @@ import com.kreitek.store.domain.entity.ShoppingCart;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring",uses={ItemMapper.class})
+@Mapper(componentModel = "spring",uses={ItemMapper.class,UserMapper.class})
 public interface ShoppingCartMapper extends EntityMapper<ShoppingCartDTO, ShoppingCart>{
 
     @Mapping(source = "item.id",target = "id")

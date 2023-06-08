@@ -43,8 +43,8 @@ public class ItemPersistenceImpl implements ItemPersistence {
     }
 
     @Override
-    public void deleteItem(Long id) {
-        this.itemRepository.deleteById(id);
+    public void deleteItem(Item item) {
+        this.itemRepository.delete(item);
     }
 
     @Override
