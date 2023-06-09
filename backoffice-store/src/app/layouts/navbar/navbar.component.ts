@@ -48,5 +48,12 @@ export class NavbarComponent {
       this.openModal();
     }
   }
+  navegar(){
+    if(this.login){
+      this.router.navigate(['logout']);
+    }else{
+      this.router.navigate(['login']);
+    }
+  }
 
 }

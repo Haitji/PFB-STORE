@@ -15,6 +15,7 @@ export class OrderItemsComponent {
   userName: string='';
   orderList: CarritoItem[]=[];
   orderId:string='';
+  itemId:number=0;
   constructor(private orderService: OrderService, private globalService: GlobalClassService,private router: ActivatedRoute,private router2: Router) { }
 
   ngOnInit(): void {
@@ -35,11 +36,15 @@ export class OrderItemsComponent {
   handleError(error: any): void {
     console.log(error)
   }
-  removeItem(itemId:number){
-    this.orderService.removeItemFromOrder(this.orderId,itemId).subscribe({
-      next: (list) => {alert("Articulo devuelto con exito");this.getAllItemByOrder()},
-      error: (error) => { this.handleError(error);alert("Error al devolver el articulo") }
-    })
+  removeItem(){
+    if(this.itemId!=0){
+      this.orderService.removeItemFromOrder(this.orderId,this.itemId).subscribe({
+        next: (list) => {alert("Articulo devuelto con exito");this.getAllItemByOrder()},
+        error: (error) => { this.handleError(error);alert("Error al devolver el articulo") }
+      })
+    }else{
+      alert("Error al devolver el producto")
+    }
   }
   cancelOrder(){
     this.orderService.cancelOrder(parseInt(this.orderId)).subscribe({
@@ -52,6 +57,8 @@ export class OrderItemsComponent {
       this.cancelOrder();
     }
   }
-
+  asignarItemId(id:number){
+    this.itemId=id;
+  }
 
 }

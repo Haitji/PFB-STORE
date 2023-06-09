@@ -1,26 +1,43 @@
-
 <h1 class="titulo">Carrito compra</h1>
 
 
-  <table *ngIf="orderList.length > 0" class="table">
-    <thead class="thead-dark">
-      <th>Id</th>
-      <th>Fecha de pedido</th>
-      <th>Direccion de pedido</th>
-      <th>Recogido</th>
-      <th>Acciones</th>
-  
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of orderList">
-        <td>{{item.id}}</td>
-        <td>{{item.orderDate}}</td>
-        <td>{{item.shippingAddress}}</td>
-        <td>{{item.sent}}</td>
-        <td class="botones">
-          <button id="boton" [routerLink]="['/orderList',item.id]">Detalles</button>
-          <button id="boton" (click)="cancelOrder(item.id)">Cancelar pedido</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<table *ngIf="orderList.length > 0" class="table">
+  <thead class="thead-dark">
+    <th>Id</th>
+    <th>Fecha de pedido</th>
+    <th>Direccion de pedido</th>
+    <th>Acciones</th>
+
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of orderList">
+      <td>{{item.id}}</td>
+      <td>{{item.orderDate}}</td>
+      <td>{{item.shippingAddress}}</td>
+      <td class="botones">
+        <button class="btn btn-secondary" id="boton" [routerLink]="['/orderList',item.id]">Detalles</button>
+        <button class="btn btn-danger" id="boton" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" (click)="asignarId(item.id)">Cancelar pedido</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h4 class="not-item" *ngIf="orderList.length == 0 && userName!=''">No tienes ningun articulo en el carrito</h4>
+
+<div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmacion eliminar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Seguro que desea cancelar el pedido?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="cancelOrder()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

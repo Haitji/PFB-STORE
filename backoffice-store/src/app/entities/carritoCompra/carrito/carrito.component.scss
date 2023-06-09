@@ -59,11 +59,6 @@ button {
     margin-right: auto;
 }
 
-.btn {
-    padding: 10px;
-    width: 20%;
-}
-
 .no {
     color: red;
     font-size: 25px;
@@ -84,6 +79,11 @@ button {
     margin-left: 80%;
     display: inline-block;
     width: 15%;
+    background-color: rgb(237, 202, 27);
+    border: 0px solid;
+    border-radius: 8px;
+    height: 40px;
+    font-size: 20px;
 }
 .titulo{
     display: inline-block;
@@ -93,4 +93,24 @@ button {
     padding:5px;
     margin-left: 85%;
     margin-right: 5%;
+}
+.not-item{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:10%;
+    width: 20%;
+    font-size: 40px;
+}
+input:invalid {
+    border-bottom: 2px solid red;
+}
+.icon{
+    font-size:20px;
+    color: #000000;
+}
+td{
+    padding: 20px;
+}
+th{
+    padding: 20px;
 }

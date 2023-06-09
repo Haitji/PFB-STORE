@@ -1,19 +1,22 @@
-<h2>Iniciar sesión</h2>
+
+<div class="contenedor">
+  <h2>Iniciar sesión</h2>
 <form #registerForm="ngForm" name="registerForm" novalidate autocomplete="off">
   <!-- Nombre -->
   <div>
     <label for="username">Nombre de usuario:</label>
     <br>
-    <input type="text" id="username" name="username" [(ngModel)]="username" required>
+    <input type="text" id="username" name="username" [(ngModel)]="username" required class="form-control">
   </div>
 
   <!-- Password -->
   <div>
     <label for="password">Contraseña:</label>
     <br>
-    <input type="password" id="password" name="password" [(ngModel)]="password">
+    <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control">
   </div>
 
-  <button (click)="login()">Iniciar sesión</button>
-  <button><a class="nav-link" [routerLink]="['/register']">Registrarse</a></button>
+  <button (click)="login()" class="btn btn-primary">Iniciar sesión</button>
+  <button class="btn btn-primary"><a class="nav-link" [routerLink]="['/register']">Registrarse</a></button>
 </form>
+</div>

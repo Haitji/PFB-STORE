@@ -5,6 +5,7 @@ import { Item } from '../model/item.model';
 import { FormsModule } from '@angular/forms';
 import { Category } from '../../category/model/category.model';
 import { CategoryService } from '../../category/service/category.service';
+import { GlobalClassService } from 'src/app/global-service/global-class.service';
 
 @Component({
   selector: 'app-item-form',
@@ -17,10 +18,15 @@ export class ItemFormComponent {
   item?: Item;
   selectedCategory?: Category;
   categories: Category[]=[];
+  units:number=0;
+  userName: string = '';
 
-  constructor(private router: ActivatedRoute, private service: ItemService,private categoryService: CategoryService) { }
+  constructor(private router: ActivatedRoute, private service: ItemService,private categoryService: CategoryService, private globalService: GlobalClassService) { }
 
   ngOnInit(): void {
+    this.globalService.getUserName().subscribe(value => {
+      this.userName = value;
+    });
     const entryParam = this.router.snapshot.paramMap.get("itemId") ?? "new";
     if (entryParam !== "new") {
       this.itemId = +this.router.snapshot.paramMap.get("itemId")!;
@@ -141,5 +147,18 @@ export class ItemFormComponent {
 
   handleError(error: any): void {
     console.log(error)
+  }
+  addItemOnShoppingCart(id:number) {
+    if(this.units>0){
+      this.service.addItemOnShoppingCart(this.userName,id,this.units).subscribe({
+        next: (responseBody: any) => {alert("Item añadido con exito al carrito");this.limpiarCampos()},
+        error: (error) => { this.handleError(error) }
+      })
+    }else{
+      alert("No puedes añadir unidades 0")
+    }
+  }
+  limpiarCampos(){
+    this.units=0;
   }
 }
