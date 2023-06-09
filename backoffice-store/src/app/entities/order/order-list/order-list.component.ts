@@ -12,6 +12,8 @@ import { OrderService } from '../service/order.service';
 export class OrderListComponent {
   userName: string='';
   orderList: Order[]=[];
+  itemId:number=0;
+
   constructor(private orderService: OrderService, private globalService: GlobalClassService, private router: Router) { }
 
   ngOnInit(): void {
@@ -30,11 +32,20 @@ export class OrderListComponent {
   handleError(error: any): void {
     console.log(error)
   }
-  cancelOrder(orderId:number){
-    this.orderService.cancelOrder(orderId).subscribe({
-      next: (list) => { alert("Pedido cancelado con exito");this.getAllOrder(); },
-      error: (error) => { this.handleError(error); alert("Error al cancelar el pedido")}
-    })
+  cancelOrder(){
+    if(this.itemId!=0){
+      this.orderService.cancelOrder(this.itemId).subscribe({
+        next: (list) => { alert("Pedido cancelado con exito");this.getAllOrder(); },
+        error: (error) => { this.handleError(error); alert("Error al cancelar el pedido")}
+      })
+    }else{
+      alert("Error al cancelar el pedido");
+    }
+
+  }
+
+  asignarId(id:number){
+    this.itemId=id;
   }
 
 }

@@ -50,11 +50,21 @@ button{
     margin-left:auto;
     margin-right: auto;
 }
-.btn{
-    padding: 10px;
-    width: 20%;
-}
+
 .no{
     color:red;
     font-size: 25px;
 }
+td{
+    width: 20%;
+    padding: 20px;
+    padding-left: 45px;
+}
+th{
+    width: 20%;
+    padding-left: 45px;
+}
+table {
+    table-layout: fixed;
+    width: 100%;
+  }

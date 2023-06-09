@@ -18,6 +18,7 @@ export class CarritoComponent {
   precioTotal: string = "0";
   botonDeshabilitado:boolean=true;
   direccion: string = "";
+  itemId:number =0;
 
   constructor(private carritoService: CarritoService, private globalService: GlobalClassService, private router: Router) { }
 
@@ -55,11 +56,16 @@ export class CarritoComponent {
     })
     this.precioTotal=precio.toFixed(2);
   }
-  quitarDeCarrito(id:number){
-    this.carritoService.removeItemOnShoppingCart(this.userName,id).subscribe({
-      next: (list:any) => { this.quitar(id);this.calcularPrecioInicio(this.Carrito) },
-      error: (error) => { this.handleError(error); }
-    })
+  quitarDeCarrito(){
+    if(this.itemId!=0){
+      this.carritoService.removeItemOnShoppingCart(this.userName,this.itemId).subscribe({
+        next: (list:any) => { this.quitar(this.itemId);this.calcularPrecioInicio(this.Carrito) },
+        error: (error) => { this.handleError(error); }
+      })
+    }else{
+      alert("Error al quitar ell producto del carrito")
+    }
+
   }
   quitar(id: number){
     const index = this.Carrito.findIndex(item => item.id === id);
@@ -93,5 +99,9 @@ export class CarritoComponent {
         error: (error) => { this.handleError(error); alert(error.message) }
       })
     }
+  }
+
+  asignarItemId(id:number){
+    this.itemId=id;
   }
 }

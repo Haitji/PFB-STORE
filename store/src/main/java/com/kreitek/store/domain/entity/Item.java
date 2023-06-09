@@ -37,7 +37,7 @@ public class Item {
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<ShoppingCart> carritoItems = new ArrayList<>();
 
     @ManyToMany(mappedBy = "favoritos")

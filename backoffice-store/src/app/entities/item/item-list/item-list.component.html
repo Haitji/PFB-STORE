@@ -50,7 +50,7 @@
 
         </a>
         <button class="btn btn-secondary" id="btnEditarCategory" [routerLink]="['/items',item.id]">Editar</button>
-        <button class="btn btn-secondary" id="btnEliminarCategory" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete"
+        <button class="btn btn-danger" id="btnEliminarCategory" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete"
           (click)="prepareItemToDelete(item.id!);">Eliminar</button>
       </td>
       <ng-container *ngIf=" userName!=''">
@@ -111,7 +111,6 @@
   </div>
 </div>
 
-<h1>{{units}}</h1>
 <div class="modal fade" id="shoppingCartModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

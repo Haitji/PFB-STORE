@@ -22,9 +22,28 @@
       <td>{{item.price}}</td>
       <td>{{item.units}}</td>
         <td class="botones">
-          <button id="boton" (click)="removeItem(item.shoppingCartId)">Devolver articulo</button>
+          <button class="btn btn-danger" id="boton" (click)="asignarItemId(item.shoppingCartId)" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete">Devolver articulo</button>
         </td>
       </tr>
     </tbody>
   </table>
- 
+
+
+  <div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmacion devolucion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Seguro que desea devolver el producto?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="removeItem()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
